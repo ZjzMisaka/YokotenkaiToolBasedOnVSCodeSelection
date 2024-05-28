@@ -144,10 +144,22 @@ void Analize(XLWorkbook workbook, IXLWorksheet sheet)
     }
     newSheet.Range(fileStartRow, 1, nowRow - 1, 1).Merge();
 
-    Console.WriteLine("setting color...");
-
     lastRowNum = newSheet.LastRowUsed().RowNumber();
-    List<string> searchList = new List<string>() { ".ColumnCount - 1", ".RowCount - 1", "Cdate", "Format", "yymmdd" };
+    List<string> searchList = new List<string>();
+
+    string colorStr;
+    do
+    {
+        Console.WriteLine("string to be colored (input '0' to exit): ");
+        colorStr = Console.ReadLine();
+        if (colorStr != "0")
+        {
+            searchList.Add(colorStr);
+        }
+    }
+    while (colorStr != "0");
+
+    Console.WriteLine("setting color...");
     for (int i = 1; i <= lastRowNum; ++i)
     {
         foreach (string str in searchList)
